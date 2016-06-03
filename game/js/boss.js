@@ -8,26 +8,14 @@ var boss = {
 	
 	boss.draw = function(x) {
 		var img = new Image();
-		if ((this.x + this.y) % 100 != 0){
-			if(x==0){
-				img.src='images/bossbot.png'
-			} else if(x==1){
-				img.src='images/bossleft.png'
-			} else if(x==2){
-				img.src='images/bosstop.png'
-			} else if(x==3){
-				img.src='images/bossright.png'
-			}
-		}else if ((this.x + this.y) % 100 == 0){
-			if(x==0){
-				img.src='images/bossbotb.png'
-			} else if(x==1){
-				img.src='images/bossleftb.png'
-			} else if(x==2){
-				img.src='images/bosstopb.png'
-			} else if(x==3){
-				img.src='images/bossrightb.png'
-			}
+		if(x==0){
+			img.src='images/bossbot.png'
+		} else if(x==1){
+			img.src='images/bossleft.png'
+		} else if(x==2){
+			img.src='images/bosstop.png'
+		} else if(x==3){
+			img.src='images/bossright.png'
 		}
     	ctx.drawImage(img,this.x,this.y)
 		if (player.x == boss.x && player.y == boss.y) {
@@ -91,7 +79,11 @@ var boss = {
 				[0,0,1,1,0,1,0,0,0,0]]
 	}
 	game.play = function () {
-		window.onkeydown = function(e) { game.processInput(e) }
-		game.init()
+		window.onkeydown = function(e) { 
+			if (player.x != win.x || player.y != win.y){
+				game.processInput(e) 
+			}
+		}
 	}
 	game.play()
+	game.init()
